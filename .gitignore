@@ -1,0 +1,22 @@
+# Compiled source #
+###################
+*.dcu
+*.obj
+*.exe
+*.bpl
+*.bpi
+*.dcp
+*.rsm
+*.stat
+*.map
+
+# Backup files    #
+###################
+*.~*
+*.log
+_*.txt
+*.identcache
+*.groupproj.local
+*.local
+*.code-workspace
+*.idea
