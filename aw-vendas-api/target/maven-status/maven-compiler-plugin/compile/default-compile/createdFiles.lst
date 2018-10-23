@@ -1,0 +1,14 @@
+com\example\demo\repository\ItemRepository.class
+com\example\demo\DemoApplication.class
+com\example\demo\resource\ProdutoResource.class
+com\example\demo\repository\VendaRepository.class
+com\example\demo\repository\ProdutoRepository.class
+com\example\demo\dto\ItemDTO.class
+com\example\demo\resource\ClienteResource.class
+com\example\demo\dto\VendaDTO.class
+com\example\demo\repository\ClienteRepository.class
+com\example\demo\resource\ItemResource.class
+com\example\demo\dto\ClienteDTO.class
+com\example\demo\service\VendaService.class
+com\example\demo\dto\ProdutoDTO.class
+com\example\demo\resource\VendaResource.class
