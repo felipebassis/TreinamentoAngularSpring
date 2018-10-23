@@ -1,6 +1,9 @@
 <div class="ui-g">
   <div class="ui-g-12">
     <p-table [value]="vendas">
+        <ng-template pTemplate="caption">
+            Listagem de vendas
+          </ng-template>
       <ng-template pTemplate="header">
         <tr>
           <th class="col-header-id">Código</th>
@@ -10,12 +13,12 @@
         </tr>
       </ng-template>
 
-      <ng-template pTemplate="body" let-venda>
+      <ng-template pTemplate="body" let-vendas>
         <tr>
-          <td>{{ venda.id }}</td>
-          <td>{{ venda.clienteDTO.nome }}</td>
-          <td class="col-data">{{ venda.cadastro | date:'dd/MM/yyyy'}}</td>
-          <td class="col-numero">{{ venda.total | currency:'BRL':true}}</td>
+          <td>{{ vendas.id }}</td>
+          <td>{{ vendas.clienteDTO.nome }}</td>
+          <td class="col-data">{{ vendas.cadastro | date:'dd/MM/yyyy'}}</td>
+          <td class="col-numero">{{ vendas.total | currency:'BRL':true}}</td>
         </tr>
       </ng-template>
     </p-table>

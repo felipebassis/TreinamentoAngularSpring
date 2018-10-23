@@ -4,7 +4,7 @@
   </div>
 </div>
 
-<form>
+<form autocomplete="off" #frm="ngForm" (ngSubmit)="adicionar(frm)" >
   <div class="ui-g">
     <div class="ui-g-8 ui-fluid">
       <label>Cliente</label>
@@ -15,7 +15,7 @@
     <div class="ui-g-4 ui-fluid">
       <label>Frete</label>
       <input pInputText id="frete" name="frete" currencyMask [options]="{ prefix: 'R$', thousands: '.', decimal: ',', allowNegative: false }"
-        [(ngModel)]="venda.frete" required>
+        [(ngModel)]="venda.frete" required (ngModelChange)="calcularTotal()">
     </div>
     <div class="ui-g-12">
       <p-panel header="Itens">
@@ -23,17 +23,57 @@
           <div class="ui-g-8 ui-fluid">
             <label>Produto</label>
             <p-dropdown id="produto" name="produto" [autoWidth]="false" placeholder="Selecione..." [options]="produtos"
-              optionLabel="nome" [(ngModel)]="item.produto"></p-dropdown>
+              optionLabel="nome" [(ngModel)]="item.produtoDTO" #produto></p-dropdown>
           </div>
           <div class="ui-g-3 ui-fluid">
             <label>Quantidade</label>
-            <input pInputText type="number" id="quantidade" name="quantidade" [(ngModel)]="item.quantidade">
+            <input pInputText type="number" id="quantidade" name="quantidade" [(ngModel)]="item.quantidade"
+              #quantidade>
           </div>
           <div class="ui-g-1 ui-fluid">
-            <button pButton type="button" icon="pi pi-plus" (click)="incluirItem"></button>
+            <br>
+            <button pButton type="button" icon="pi pi-plus" (click)="incluirItem()" [disabled]="!produto.value || !quantidade.value"></button>
+          </div>
+
+          <div class="ui-g-12">
+            <p-table [value]="venda.itemDTOList">
+
+              <ng-template pTemplate="header">
+                <tr>
+                  <th>Produto</th>
+                  <th>Valor Unitário</th>
+                  <th>Quantidade</th>
+                  <th>Total</th>
+                </tr>
+              </ng-template>
+
+              <ng-template pTemplate="body" let-item>
+                <tr>
+                  <td>{{ item.produtoDTO.nome }}</td>
+                  <td>{{ item.produtoDTO.valor | currency:'BRL':true}}</td>
+                  <td>{{ item.quantidade }}</td>
+                  <td>{{ item.total | currency:'BRL':true}}</td>
+                </tr>
+              </ng-template>
+
+              <ng-template pTemplate="emptymessage">
+                <tr>
+                  <td colspan="4" style="text-align: center;"> Nenhum item adicionado na venda</td>
+                </tr>
+              </ng-template>
+            </p-table>
           </div>
         </div>
       </p-panel>
+    </div>
+
+    <div class="ui-g-4 ui-g-offset-8 ui-fluid">
+      <label>Total</label>
+      <input pInputText readonly [value]="venda.total | currency:'BRL':true">
+    </div>
+
+    <div class="ui-g-4">
+      <button pButton icon="pi pi-check" label="Salvar" [disabled]="frm.invalid || venda.itemDTOList.length === 0"></button>
     </div>
   </div>
 </form>
